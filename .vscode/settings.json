@@ -51,5 +51,7 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Zombie VR.sln"
+    "dotnet.defaultSolution": "Zombie VR.sln",
+    "dotnetAcquisitionExtension.requestedRuntimeVersion": "9.0",
+    "dotnet.defaultPath": "C:\\Program Files\\dotnet\\dotnet.exe"
 }

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class BatteryPickup : MonoBehaviour
 {
-    [SerializeField] float restoreAngle = 90f;
-    [SerializeField] float addIntensity = 1f;
+    [SerializeField]
+    float restoreAngle = 90f;
+
+    [SerializeField]
+    float addIntensity = 1f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,5 +19,4 @@ public class BatteryPickup : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

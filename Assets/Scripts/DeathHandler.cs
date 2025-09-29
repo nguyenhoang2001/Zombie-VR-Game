@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DeathHandler : MonoBehaviour
 {
-    [SerializeField] Canvas gameOverCanvas;
+    [SerializeField]
+    Canvas gameOverCanvas;
 
     private void Start()
     {
@@ -19,5 +20,4 @@ public class DeathHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
-
 }
