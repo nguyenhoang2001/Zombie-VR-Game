@@ -6,13 +6,18 @@
 [Ll]ogs/
 [Mm]emoryCaptures/
 UserSettings/
-
+Editor Default Resources/
+Firebase/
+ExternalDependencyManager/
 # Visual Studio cache
 .vs/
 *.csproj
 *.sln
 *.user
 *.unityproj
+*.meta
+google-services.json
+google-services-desktop.json
 
 # OS
 .DS_Store

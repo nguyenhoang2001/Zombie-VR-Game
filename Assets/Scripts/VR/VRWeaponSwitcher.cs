@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class VRWeaponSwitcher : MonoBehaviour
 {
-    [SerializeField] int currentWeapon = 0;
+    [SerializeField]
+    int currentWeapon = 0;
 
     void Start()
     {
@@ -15,55 +16,29 @@ public class VRWeaponSwitcher : MonoBehaviour
     void Update()
     {
         int previousWeapon = currentWeapon;
-        // ProcessKeyInput();
-        // ProcessScrollWheel();
 
-        // if (previousWeapon != currentWeapon)
-        // {
-        //     SetWeaponActive();
-        // }
-    }
-
-    private void ProcessScrollWheel()
-    {
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        if (previousWeapon != currentWeapon)
         {
-            if (currentWeapon >= transform.childCount - 1)
-            {
-                currentWeapon = 0;
-            }
-            else
-            {
-                currentWeapon++;
-            }
-        }
-
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
-        {
-            if (currentWeapon <= 0)
-            {
-                currentWeapon = transform.childCount - 1;
-            }
-            else
-            {
-                currentWeapon--;
-            }
+            SetWeaponActive();
         }
     }
 
-    private void ProcessKeyInput()
+    public void NextWeapon()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        int previousWeapon = currentWeapon;
+
+        if (currentWeapon >= transform.childCount - 1)
         {
             currentWeapon = 0;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        else
         {
-            currentWeapon = 1;
+            currentWeapon++;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+
+        if (previousWeapon != currentWeapon)
         {
-            currentWeapon = 2;
+            SetWeaponActive();
         }
     }
 
@@ -83,7 +58,5 @@ public class VRWeaponSwitcher : MonoBehaviour
             }
             weaponIndex++;
         }
-
     }
-
 }

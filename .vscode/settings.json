@@ -41,6 +41,8 @@
         "**/*.meta": true,
         "**/*.prefab": true,
         "**/*.unity": true,
+        "**/*.csproj": true,
+        "**/*.sln": true,
         "build/": true,
         "Build/": true,
         "Library/": true,
