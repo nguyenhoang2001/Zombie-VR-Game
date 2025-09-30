@@ -7,31 +7,36 @@ public static class EventManager
     // String-named channels (new)
     // --------------------------
     // One list per channel; each handler is stored as Action<object?>.
-    private static readonly Dictionary<string, Action<object?>> _channels =
-        new(StringComparer.Ordinal);
+    private static readonly Dictionary<string, Action<object?>> _channels = new(
+        StringComparer.Ordinal
+    );
 
     // Lets us unsubscribe using the original delegate.
-    private static readonly Dictionary<Delegate, Action<object?>> _wrapperLookup =
-        new();
+    private static readonly Dictionary<Delegate, Action<object?>> _wrapperLookup = new();
 
     /// Pre-create channels (call once on boot).
     public static void Initialize(IEnumerable<string> eventNames)
     {
-        if (eventNames == null) return;
-        foreach (var name in eventNames) EnsureEvent(name);
+        if (eventNames == null)
+            return;
+        foreach (var name in eventNames)
+            EnsureEvent(name);
     }
 
     /// Ensure a channel exists; no-op if already present.
     public static void EnsureEvent(string eventName)
     {
-        if (string.IsNullOrWhiteSpace(eventName)) return;
-        if (!_channels.ContainsKey(eventName)) _channels[eventName] = null;
+        if (string.IsNullOrWhiteSpace(eventName))
+            return;
+        if (!_channels.ContainsKey(eventName))
+            _channels[eventName] = null;
     }
 
     /// Subscribe to a no-payload channel by name.
     public static void Subscribe(string eventName, Action handler)
     {
-        if (handler == null) return;
+        if (handler == null)
+            return;
         EnsureEvent(eventName);
         Action<object?> wrapper = _ => handler();
 
@@ -42,12 +47,14 @@ public static class EventManager
     /// Subscribe with a strongly-typed payload.
     public static void Subscribe<T>(string eventName, Action<T> handler)
     {
-        if (handler == null) return;
+        if (handler == null)
+            return;
         EnsureEvent(eventName);
         Action<object?> wrapper = o =>
         {
             // Ignore if payload isn’t the expected type.
-            if (o is T t) handler(t);
+            if (o is T t)
+                handler(t);
         };
 
         _wrapperLookup[handler] = wrapper;
@@ -57,8 +64,10 @@ public static class EventManager
     /// Unsubscribe (no-payload) by original handler.
     public static void Unsubscribe(string eventName, Action handler)
     {
-        if (handler == null) return;
-        if (!_wrapperLookup.TryGetValue(handler, out var wrapper)) return;
+        if (handler == null)
+            return;
+        if (!_wrapperLookup.TryGetValue(handler, out var wrapper))
+            return;
         if (_channels.TryGetValue(eventName, out var chain))
         {
             chain -= wrapper;
@@ -70,8 +79,10 @@ public static class EventManager
     /// Unsubscribe (typed payload) by original handler.
     public static void Unsubscribe<T>(string eventName, Action<T> handler)
     {
-        if (handler == null) return;
-        if (!_wrapperLookup.TryGetValue(handler, out var wrapper)) return;
+        if (handler == null)
+            return;
+        if (!_wrapperLookup.TryGetValue(handler, out var wrapper))
+            return;
         if (_channels.TryGetValue(eventName, out var chain))
         {
             chain -= wrapper;
