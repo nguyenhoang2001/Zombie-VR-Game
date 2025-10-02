@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class FlashLightSystem : MonoBehaviour
 {
-    [SerializeField] float lightDecay = .1f;
-    [SerializeField] float angleDecay = 1f;
-    [SerializeField] float minimumAngle = 40f;
+    [SerializeField]
+    float lightDecay = .1f;
+
+    [SerializeField]
+    float angleDecay = 1f;
+
+    [SerializeField]
+    float minimumAngle = 40f;
 
     Light myLight;
 
@@ -28,7 +33,7 @@ public class FlashLightSystem : MonoBehaviour
 
     public void AddLightIntensity(float intensityAmount)
     {
-        myLight.intensity += intensityAmount; 
+        myLight.intensity += intensityAmount;
     }
 
     private void DecreaseLightAngle()
@@ -47,5 +52,4 @@ public class FlashLightSystem : MonoBehaviour
     {
         myLight.intensity -= lightDecay * Time.deltaTime;
     }
-
 }

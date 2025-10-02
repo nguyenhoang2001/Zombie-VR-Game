@@ -8,6 +8,13 @@ public class VRWeaponSwitcher : MonoBehaviour
     [SerializeField]
     int currentWeapon = 0;
 
+    // Drag your left-hand interactor's LeftHandHoldDetector here in the Inspector
+    [SerializeField]
+    LeftHandHoldDetector leftHandDetector;
+
+    [SerializeField]
+    private PickUpManager pickUpManager;
+
     void Start()
     {
         SetWeaponActive();
@@ -24,6 +31,14 @@ public class VRWeaponSwitcher : MonoBehaviour
     }
 
     public void NextWeapon()
+    {
+        if (pickUpManager != null && pickUpManager.isHoldingAnObject)
+            return;
+
+        DoNextWeapon();
+    }
+
+    public void DoNextWeapon()
     {
         int previousWeapon = currentWeapon;
 

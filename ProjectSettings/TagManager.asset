@@ -5,11 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Anchor
+  - Destroyer
+  - Water
+  - Projectile
+  - Flame
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Pick Up
   - Water
   - UI
   - Mini Map

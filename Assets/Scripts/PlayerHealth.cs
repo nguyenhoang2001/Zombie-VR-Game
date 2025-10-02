@@ -12,6 +12,15 @@ public class PlayerHealth : MonoBehaviour
 
     private bool isDead = false;
 
+    public void Heal(float amount)
+    {
+        if (isDead)
+            return;
+        hitPoints += amount;
+        hitPoints = Mathf.Clamp(hitPoints, 0, maxHitPoints);
+        healthBar?.UpdateHealth(maxHitPoints, hitPoints);
+    }
+
     public void TakeDamage(float damage)
     {
         if (isDead)
@@ -20,13 +29,18 @@ public class PlayerHealth : MonoBehaviour
         hitPoints -= damage;
         hitPoints = Mathf.Clamp(hitPoints, 0, maxHitPoints);
 
-        healthBar.UpdateHealth(maxHitPoints, hitPoints);
+        healthBar?.UpdateHealth(maxHitPoints, hitPoints);
 
         if (hitPoints <= 0 && !isDead)
         {
             isDead = true;
             StartCoroutine(WaitForHealthBarThenDie());
         }
+    }
+
+    public float GetHealth()
+    {
+        return hitPoints;
     }
 
     private IEnumerator WaitForHealthBarThenDie()

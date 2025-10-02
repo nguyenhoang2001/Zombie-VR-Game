@@ -11,6 +11,9 @@ public class TappingInput : MonoBehaviour
     public UnityEvent OnRightWristTap;
     public UnityEvent OnRightElbowTap;
 
+    [Header("No Tap Events")]
+    public UnityEvent OnNoTapEvent;
+
     public void TriggerLeftWristTap()
     {
         OnLeftWristTap?.Invoke();
@@ -31,12 +34,18 @@ public class TappingInput : MonoBehaviour
         OnRightElbowTap?.Invoke();
     }
 
+    public void TriggerNoTap()
+    {
+        OnNoTapEvent?.Invoke();
+    }
+
     private void OnEnable()
     {
         EventManager.Subscribe(EventNames.TAPP_LEFT_WRIST, TriggerLeftWristTap);
         EventManager.Subscribe(EventNames.TAPP_LEFT_ELBOW, TriggerLeftElbowTap);
         EventManager.Subscribe(EventNames.TAPP_RIGHT_WRIST, TriggerRightWristTap);
         EventManager.Subscribe(EventNames.TAPP_RIGHT_ELBOW, TriggerRightElbowTap);
+        EventManager.Subscribe(EventNames.NO_TAPP, TriggerNoTap);
     }
 
     private void OnDisable()
@@ -45,5 +54,6 @@ public class TappingInput : MonoBehaviour
         EventManager.Unsubscribe(EventNames.TAPP_LEFT_ELBOW, TriggerLeftElbowTap);
         EventManager.Unsubscribe(EventNames.TAPP_RIGHT_WRIST, TriggerRightWristTap);
         EventManager.Unsubscribe(EventNames.TAPP_RIGHT_ELBOW, TriggerRightElbowTap);
+        EventManager.Unsubscribe(EventNames.NO_TAPP, TriggerNoTap);
     }
 }

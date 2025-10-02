@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class WeaponSwitcher : MonoBehaviour
 {
-    [SerializeField] int currentWeapon = 0;
+    [SerializeField]
+    int currentWeapon = 0;
 
     void Start()
     {
@@ -84,7 +85,5 @@ public class WeaponSwitcher : MonoBehaviour
             }
             weaponIndex++;
         }
-
     }
-
 }
