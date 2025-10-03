@@ -16,6 +16,8 @@ public class EnemyAttack : MonoBehaviour
 
     public void AttackHitEvent()
     {
+        if (GetComponentInParent<EnemyHealth>()?.IsDead() == true)
+            return;
         if (target == null)
             return;
         target.TakeDamage(damage);
