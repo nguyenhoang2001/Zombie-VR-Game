@@ -10416,9 +10416,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 794188320}
     - target: {fileID: 4099218833560098505, guid: 275fcd0943fb1ac4fa1dffc395f4ec5b, type: 3}
+      propertyPath: maxDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099218833560098505, guid: 275fcd0943fb1ac4fa1dffc395f4ec5b, type: 3}
+      propertyPath: followSmooth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099218833560098505, guid: 275fcd0943fb1ac4fa1dffc395f4ec5b, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1995603890}
+    - target: {fileID: 4099218833560098505, guid: 275fcd0943fb1ac4fa1dffc395f4ec5b, type: 3}
+      propertyPath: surfaceOffset
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4099218833560098505, guid: 275fcd0943fb1ac4fa1dffc395f4ec5b, type: 3}
       propertyPath: alignToSurface
       value: 1
