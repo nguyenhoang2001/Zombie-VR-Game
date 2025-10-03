@@ -624,7 +624,7 @@ PrefabInstance:
     - target: {fileID: 4938736518922398534, guid: c9ccfe2c918716b4da86c7495659efe5, type: 3}
       propertyPath: OnLeftElbowTap.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1505132695}
     - target: {fileID: 4938736518922398534, guid: c9ccfe2c918716b4da86c7495659efe5, type: 3}
       propertyPath: OnLeftWristTap.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -659,7 +659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4938736518922398534, guid: c9ccfe2c918716b4da86c7495659efe5, type: 3}
       propertyPath: OnLeftElbowTap.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Inject
+      value: Drop
       objectReference: {fileID: 0}
     - target: {fileID: 4938736518922398534, guid: c9ccfe2c918716b4da86c7495659efe5, type: 3}
       propertyPath: OnLeftWristTap.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -687,7 +687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4938736518922398534, guid: c9ccfe2c918716b4da86c7495659efe5, type: 3}
       propertyPath: OnLeftElbowTap.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Syringe, Assembly-CSharp
+      value: PickUpObject, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4938736518922398534, guid: c9ccfe2c918716b4da86c7495659efe5, type: 3}
       propertyPath: OnLeftWristTap.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2177,7 +2177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandInteractor: {fileID: 17976678}
   trackedObjects:
-  - {fileID: 1505132691}
+  - {fileID: 0}
 --- !u!1 &438685828
 GameObject:
   m_ObjectHideFlags: 0
@@ -6060,17 +6060,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 675075217809585424, guid: 4b4a71e62d882654a89f6f207cb75b85, type: 3}
   m_PrefabInstance: {fileID: 1502520505}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1505132691 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2980722489484427249, guid: 4b4a71e62d882654a89f6f207cb75b85, type: 3}
-  m_PrefabInstance: {fileID: 1502520505}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1505132695 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1060486642257043271, guid: 4b4a71e62d882654a89f6f207cb75b85, type: 3}
@@ -7519,6 +7508,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5760720263959880820, guid: 692c34a04b55aab468830c99e6bf041d, type: 3}
+      propertyPath: pickUpManager
+      value: 
+      objectReference: {fileID: 419048686}
     - target: {fileID: 5955720527034477120, guid: 692c34a04b55aab468830c99e6bf041d, type: 3}
       propertyPath: m_Name
       value: Hand Mini Map
@@ -7650,6 +7643,10 @@ PrefabInstance:
     - target: {fileID: 7445190505266196338, guid: 692c34a04b55aab468830c99e6bf041d, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572168634260031213, guid: 692c34a04b55aab468830c99e6bf041d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7670337038198598823, guid: 692c34a04b55aab468830c99e6bf041d, type: 3}
       propertyPath: m_IsActive

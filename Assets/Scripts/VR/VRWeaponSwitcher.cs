@@ -32,7 +32,7 @@ public class VRWeaponSwitcher : MonoBehaviour
 
     public void NextWeapon()
     {
-        if (pickUpManager != null && pickUpManager.isHoldingAnObject)
+        if (pickUpManager != null && !pickUpManager.IsLeftHandGrippingAnyTracked())
             return;
 
         DoNextWeapon();

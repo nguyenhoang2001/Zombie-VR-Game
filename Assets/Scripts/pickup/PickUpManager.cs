@@ -10,52 +10,16 @@ public class PickUpManager : MonoBehaviour
 
     [Header("Trackable Objects")]
     [SerializeField]
-    private List<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable> trackedObjects =
-        new List<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+    private List<PickUpObject> trackedObjects = new List<PickUpObject>();
 
-    public bool isHoldingAnObject { get; private set; } = false;
-
-    private void OnEnable()
-    {
-        foreach (var obj in trackedObjects)
-        {
-            if (obj != null)
-            {
-                obj.selectEntered.AddListener(OnGrabbed);
-                obj.selectExited.AddListener(OnReleased);
-            }
-        }
-    }
-
-    private void OnDisable()
-    {
-        foreach (var obj in trackedObjects)
-        {
-            if (obj != null)
-            {
-                obj.selectEntered.RemoveListener(OnGrabbed);
-                obj.selectExited.RemoveListener(OnReleased);
-            }
-        }
-    }
-
-    private void Update()
-    {
-        isHoldingAnObject = IsLeftHandGrippingAnyTracked();
-    }
-
-    private void OnGrabbed(SelectEnterEventArgs args) => Update();
-
-    private void OnReleased(SelectExitEventArgs args) => Update();
-
-    private bool IsLeftHandGrippingAnyTracked()
+    public bool IsLeftHandGrippingAnyTracked()
     {
         if (leftHandInteractor == null)
             return false;
 
         foreach (var obj in trackedObjects)
         {
-            if (obj != null && leftHandInteractor.interactablesSelected.Contains(obj))
+            if (obj != null && obj.isGrabbedBeforeRelease)
             {
                 return true;
             }
