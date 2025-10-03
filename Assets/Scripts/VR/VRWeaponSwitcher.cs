@@ -1,77 +1,28 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VRWeaponSwitcher : MonoBehaviour
 {
     [SerializeField]
-    int currentWeapon = 0;
-
-    // Drag your left-hand interactor's LeftHandHoldDetector here in the Inspector
-    [SerializeField]
-    LeftHandHoldDetector leftHandDetector;
-
-    [SerializeField]
-    private PickUpManager pickUpManager;
-
-    void Start()
-    {
-        SetWeaponActive();
-    }
-
-    void Update()
-    {
-        int previousWeapon = currentWeapon;
-
-        if (previousWeapon != currentWeapon)
-        {
-            SetWeaponActive();
-        }
-    }
+    private int currentWeapon = 0;
 
     public void NextWeapon()
     {
-        if (pickUpManager != null && !pickUpManager.IsLeftHandGrippingAnyTracked())
+        if (PickUpManager.Instance != null && PickUpManager.Instance.AnyHeldThisCycle)
+        {
+            Debug.Log("[WeaponSwitcher] Swap BLOCKED: a pickup was held this cycle.");
             return;
+        }
 
-        DoNextWeapon();
+        currentWeapon = (currentWeapon + 1) % transform.childCount;
+
+        int i = 0;
+        foreach (Transform t in transform)
+            t.gameObject.SetActive(i++ == currentWeapon);
     }
 
-    public void DoNextWeapon()
+    // Call this after your ML/tap event completes to start a fresh cycle.
+    public void ResetCycleAfterDecision()
     {
-        int previousWeapon = currentWeapon;
-
-        if (currentWeapon >= transform.childCount - 1)
-        {
-            currentWeapon = 0;
-        }
-        else
-        {
-            currentWeapon++;
-        }
-
-        if (previousWeapon != currentWeapon)
-        {
-            SetWeaponActive();
-        }
-    }
-
-    private void SetWeaponActive()
-    {
-        int weaponIndex = 0;
-
-        foreach (Transform weapon in transform)
-        {
-            if (weaponIndex == currentWeapon)
-            {
-                weapon.gameObject.SetActive(true);
-            }
-            else
-            {
-                weapon.gameObject.SetActive(false);
-            }
-            weaponIndex++;
-        }
+        PickUpManager.Instance?.ResetCycle();
     }
 }

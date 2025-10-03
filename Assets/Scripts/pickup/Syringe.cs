@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class Syringe : PickUpObject
 {
@@ -9,17 +8,19 @@ public class Syringe : PickUpObject
     [SerializeField]
     private PlayerHealth playerHealth;
 
+    public override void Activate()
+    {
+        if (!WasHeldSinceLastCycle || !playerHealth)
+            return;
+        playerHealth.Heal(healAmount);
+        Destroy(gameObject);
+    }
+
     public void Inject()
     {
-        if (playerHealth.GetHealth() >= 100f)
-        {
-            isGrabbedBeforeRelease = false;
+        if (!playerHealth)
             return;
-        }
-
-        Debug.Log("Injected");
-
-        playerHealth?.Heal(healAmount);
+        playerHealth.Heal(healAmount);
         Destroy(gameObject);
     }
 }

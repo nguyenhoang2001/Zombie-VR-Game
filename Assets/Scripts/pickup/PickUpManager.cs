@@ -1,29 +1,79 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
+[DefaultExecutionOrder(-100)]
 public class PickUpManager : MonoBehaviour
 {
-    [Header("Left Hand Interactor")]
-    [SerializeField]
-    private UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInteractor leftHandInteractor;
+    public static PickUpManager Instance { get; private set; }
 
-    [Header("Trackable Objects")]
-    [SerializeField]
-    private List<PickUpObject> trackedObjects = new List<PickUpObject>();
+    private readonly HashSet<PickUpObject> registered = new HashSet<PickUpObject>();
 
-    public bool IsLeftHandGrippingAnyTracked()
+    [SerializeField]
+    bool discoverOnStart = true;
+
+    void Awake()
     {
-        if (leftHandInteractor == null)
-            return false;
-
-        foreach (var obj in trackedObjects)
+        if (Instance != null && Instance != this)
         {
-            if (obj != null && obj.isGrabbedBeforeRelease)
-            {
-                return true;
-            }
+            Destroy(this);
+            return;
         }
-        return false;
+        Instance = this;
+    }
+
+    void Start()
+    {
+        if (!discoverOnStart)
+            return;
+        foreach (var p in FindObjectsOfType<PickUpObject>(includeInactive: true))
+            Register(p);
+    }
+
+    public void Register(PickUpObject obj)
+    {
+        if (obj)
+            registered.Add(obj);
+    }
+
+    public void Unregister(PickUpObject obj)
+    {
+        if (obj)
+            registered.Remove(obj);
+    }
+
+    /// True if any registered pickup that blocks swap was held at least once this cycle.
+    public bool AnyHeldThisCycle =>
+        registered.Any(o => o && o.BlocksSwap && o.WasHeldSinceLastCycle);
+
+    /// Activate the most recently held pickup in this cycle (if any). Returns true if one was activated.
+    public void ActivateMostRecentHeld()
+    {
+        var target = registered
+            .Where(o => o && o.WasHeldSinceLastCycle)
+            .OrderByDescending(o => o.LastHeldTime)
+            .FirstOrDefault();
+
+        if (!target)
+            return;
+
+        target.Activate();
+    }
+
+    /// Activate all pickups that were held this cycle (rare, but sometimes useful).
+    public void ActivateAllHeld()
+    {
+        foreach (var o in registered.Where(o => o && o.WasHeldSinceLastCycle))
+        {
+            o.Activate();
+        }
+    }
+
+    /// Call this after your ML/tap decision completes (wrist/elbow/no-tap).
+    public void ResetCycle()
+    {
+        foreach (var o in registered)
+            if (o)
+                o.ResetCycleFlag();
     }
 }
