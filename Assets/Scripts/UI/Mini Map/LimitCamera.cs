@@ -10,7 +10,7 @@ public class LimitCamera : MonoBehaviour
     {
         transform.position = new Vector3(
             player.transform.position.x,
-            40,
+            150,
             player.transform.position.z
         );
     }
