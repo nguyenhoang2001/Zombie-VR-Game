@@ -20,11 +20,11 @@ public class FlashLightSystem : MonoBehaviour
         myLight = GetComponent<Light>();
     }
 
-    private void Update()
-    {
-        DecreaseLightAngle();
-        DecreaseLightIntensity();
-    }
+    // private void Update()
+    // {
+    //     DecreaseLightAngle();
+    //     DecreaseLightIntensity();
+    // }
 
     public void RestoreLightAngle(float restoreAngle)
     {

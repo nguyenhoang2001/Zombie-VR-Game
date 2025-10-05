@@ -75,12 +75,29 @@ public class VRWeapon : MonoBehaviour
         {
             if (muzzleFlash)
                 muzzleFlash.Play();
+            PlayShootSound();
             ProcessRaycast();
             ammoSlot.ReduceCurrentAmmo(ammoType);
         }
 
         yield return new WaitForSeconds(timeBetweenShots);
         canShoot = true;
+    }
+
+    private void PlayShootSound()
+    {
+        switch (ammoType)
+        {
+            case AmmoType.Bullets:
+                AudioManager.Instance.PlayOneShot(AudioManager.Instance.pistolShot);
+                break;
+            case AmmoType.Shells:
+                AudioManager.Instance.PlayOneShot(AudioManager.Instance.shotgunShot);
+                break;
+            // case AmmoType.Rockets:
+            //     AudioManager.Instance.PlayOneShot(AudioManager.Instance.rocketShot);
+            //     break;
+        }
     }
 
     void ProcessRaycast()

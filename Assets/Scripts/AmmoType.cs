@@ -1,7 +1,6 @@
-﻿
-public enum AmmoType
+﻿public enum AmmoType
 {
     Bullets,
     Shells,
-    Rockets
+    Rockets,
 }

@@ -195,7 +195,9 @@ namespace UnityEngine.XR.Content.Interaction
         }
 
         [SerializeField]
-        [Tooltip("Whether to enable the comfort mode that applies the tunneling vignette effect to smooth movement and turn.")]
+        [Tooltip(
+            "Whether to enable the comfort mode that applies the tunneling vignette effect to smooth movement and turn."
+        )]
         bool m_EnableComfortMode;
 
         public bool enableComfortMode
@@ -231,7 +233,9 @@ namespace UnityEngine.XR.Content.Interaction
         }
 
         [SerializeField]
-        [Tooltip("Whether to enable flying for continuous and grab movement. This overrides the use of gravity.")]
+        [Tooltip(
+            "Whether to enable flying for continuous and grab movement. This overrides the use of gravity."
+        )]
         bool m_EnableFly;
 
         /// <summary>
@@ -272,7 +276,10 @@ namespace UnityEngine.XR.Content.Interaction
         void Awake()
         {
             if (m_ComfortMode == null)
-                Debug.LogWarning("Comfort Mode GameObject is not set in the Locomotion Manager.", this);
+                Debug.LogWarning(
+                    "Comfort Mode GameObject is not set in the Locomotion Manager.",
+                    this
+                );
         }
 
         void OnEnable()

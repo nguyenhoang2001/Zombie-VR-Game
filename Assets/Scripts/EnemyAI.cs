@@ -17,6 +17,8 @@ public class EnemyAI : MonoBehaviour
     EnemyHealth health;
     Transform target;
 
+    private bool isDead = false;
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -28,9 +30,10 @@ public class EnemyAI : MonoBehaviour
     {
         if (health.IsDead())
         {
-            enabled = false;
-            navMeshAgent.enabled = false;
+            HandleDeath();
+            return;
         }
+
         distanceToTarget = Vector3.Distance(target.position, transform.position);
         if (isProvoked)
         {
@@ -40,6 +43,17 @@ public class EnemyAI : MonoBehaviour
         {
             isProvoked = true;
         }
+    }
+
+    private void HandleDeath()
+    {
+        if (!isDead)
+        {
+            isDead = true;
+            StopGroaning();
+        }
+        enabled = false;
+        navMeshAgent.enabled = false;
     }
 
     public void OnDamageTaken()
@@ -63,6 +77,7 @@ public class EnemyAI : MonoBehaviour
 
     private void ChaseTarget()
     {
+        PlayGroanSound();
         GetComponent<Animator>().SetBool("attack", false);
         GetComponent<Animator>().SetTrigger("move");
         navMeshAgent.SetDestination(target.position);
@@ -82,6 +97,16 @@ public class EnemyAI : MonoBehaviour
             lookRotation,
             Time.deltaTime * turnSpeed
         );
+    }
+
+    private void PlayGroanSound()
+    {
+        AudioManager.Instance.PlayZombieGroan();
+    }
+
+    private void StopGroaning()
+    {
+        AudioManager.Instance.StopZombieGroan();
     }
 
     void OnDrawGizmosSelected()
